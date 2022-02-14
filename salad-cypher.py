@@ -2,6 +2,18 @@ from sys import argv
 
 alphabet = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
+cypherbet = None
+
+if(argv[1]):
+    cypherbet = list(argv[1].upper()) #some funky issues might occur if cypher key has duplicate characters like "salad" but code should handle it fine
+    for char in alphabet:
+        if char not in cypherbet:
+            cypherbet.append(char)
+else:
+    cypherbet = alphabet
+
+print(cypherbet)
+
 input = open('input.txt', 'r').read().upper()
 
 x2 = 0
@@ -25,17 +37,17 @@ for i in range(len(input)):
         x2 = x1
         x1 = x0
 
-        charIndex = alphabet.index(input[i])
+        charIndex = cypherbet.index(input[i])
         cypherIndex = 0
 
         if(trueI % 2 == 0):
-            cypherIndex = (charIndex + x0) % len(alphabet)
+            cypherIndex = (charIndex + x0) % len(cypherbet)
         elif(x0 > charIndex):
-            cypherIndex = len(alphabet) - (abs(charIndex - x0) % len(alphabet))
+            cypherIndex = (len(cypherbet) - 1) - (abs(charIndex - x0) % len(cypherbet))
         else:
             cypherIndex = charIndex - x0
 
-        output = output + alphabet[cypherIndex]
+        output = output + cypherbet[cypherIndex]
         trueI = trueI + 1
     else:
         output = output + ' '
