@@ -32,7 +32,7 @@ if(argv[2]):
 else:
     cypherbet = alphabet
 
-print(cypherbet)
+print(''.join(cypherbet))
 
 input = open('input.txt', 'r').read().upper()
 
