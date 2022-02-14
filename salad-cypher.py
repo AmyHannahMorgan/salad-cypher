@@ -40,5 +40,7 @@ for i in range(len(input)):
     else:
         output = output + ' '
 
-print(output)
+outputFile = open('output.txt', 'w')
+outputFile.write(output)
+outputFile.close()
         
