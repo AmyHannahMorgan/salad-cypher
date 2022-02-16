@@ -25,7 +25,7 @@ alphabet = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 cypherbet = None
 
 if(argv[2]):
-    cypherbet = list(argv[2].upper()) #some funky issues might occur if cypher key has duplicate characters like "salad" but code should handle it fine
+    cypherbet = list(dict.fromkeys(list(argv[2].upper()))) # fix potential issue where cypher key has duplicate letters
     for char in alphabet:
         if char not in cypherbet:
             cypherbet.append(char)
@@ -45,7 +45,7 @@ trueI = 0
 output = ''
 
 for i in range(len(input)):
-    if(input[i] != ' '):
+    if(input[i] in cypherbet):
         #calculate next step in sequence
         x0 = x1 + x2
 
@@ -69,7 +69,7 @@ for i in range(len(input)):
 
         output = output + cypherbet[cypherIndex]
         trueI = trueI + 1
-    else:
+    elif(input[i] == ' '):
         output = output + ' '
 
 outputFile = open('output.txt', 'w')
